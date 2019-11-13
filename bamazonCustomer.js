@@ -20,6 +20,7 @@ var connection = mysql.createConnection({
 
 });
 
+// Connect to mysql server and sql database
 connection.connect(function(err){
     if(err) throw err;
     console.log('-----------------------------------');
@@ -30,7 +31,7 @@ connection.connect(function(err){
 });
 
 
-
+// function to show list of products from bamazon_db
 function showProducts(){
     connection.query('SELECT * FROM products', function(err, res){
         if(err) throw err;
@@ -43,6 +44,7 @@ function showProducts(){
     });
 }
 
+// Prompt user for item id and amount of item they would like to purchase
 function buyProduct(){
     connection.query('SELECT * FROM products', function(err, res){
         if (err) throw err;
@@ -61,14 +63,15 @@ function buyProduct(){
             }
         ]).then(function(answer){
             // console.log(answer);
+
+            // Push user results to checkProductAvail function
             checkProductAvail(answer.id, answer.units);
 
-            
         });
     });
-
 }
 
+// Check to see if product is available based off how many units the user specified
 function checkProductAvail(arr1, arr2){
     connection.query('SELECT * FROM products WHERE item_id = ' + arr1, function(err, res){
         if (err) throw err;
@@ -85,13 +88,15 @@ function checkProductAvail(arr1, arr2){
                 // console.log(quantity);
                 updateProductAvail(quantity, arr1, total);
             } else {
-                console.log('Insufficient quantity!')
+                console.log('Insufficient quantity!');
+                showProducts();
             }
         }
 
     });        
 }
 
+// Update the database with stock_quantity after purchase
 function updateProductAvail(arr1, arr2, arr3){
     connection.query('UPDATE products SET stock_quantity = ' + arr1 + ' WHERE item_id= ' + arr2, function(err, res){
         if(err) throw err;
