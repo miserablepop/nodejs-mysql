@@ -13,3 +13,13 @@ Bamazon is an Amazon-like storefront using MySQL and Node.js. The app will take 
 * [inquirer](https://www.npmjs.com/package/inquirer)
 
 ## How to Run Bamazon
+
+
+## Video
+
+Below is a link to a screen recording of the app working:
+
+[Screen Recording]()
+
+## Author
+* **JC Lenz** 
