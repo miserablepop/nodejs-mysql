@@ -34,7 +34,7 @@ connection.connect(function(err){
 function showProducts(){
     connection.query('SELECT * FROM products', function(err, res){
         if(err) throw err;
-        console.log('\nProducts:')
+        console.log('\nWelcome to Bamazon:')
         for (var i = 0; i < res.length; i++){
             console.log('\n' + res[i].item_id + ' | ' + res[i].product_name + ' | ' + res[i].price);
         }
@@ -47,16 +47,17 @@ function buyProduct(){
     connection.query('SELECT * FROM products', function(err, res){
         if (err) throw err;
 
+        console.log('\nPlease answer the following questions based off the list above.')
         inquirer.prompt([
             {
                 name: 'id',
                 type: 'input',
-                message: 'Please enter the item ID of the item you would like to purchase:'
+                message: '\nPlease enter the item ID of the item you would like to purchase:'
             },
             {
                 name: 'units',
                 type: 'input',
-                message: 'How many units of the product would you like to purchase?'
+                message: '\nHow many units of the product would you like to purchase?'
             }
         ]).then(function(answer){
             // console.log(answer);
@@ -71,17 +72,32 @@ function buyProduct(){
 function checkProductAvail(arr1, arr2){
     connection.query('SELECT * FROM products WHERE item_id = ' + arr1, function(err, res){
         if (err) throw err;
-        console.log(res);
+        // console.log(res);
 
         for (var i = 0; i < res.length; i++){
             var quantity = res[i].stock_quantity;
+            var price = res[i].price;
             if (arr2 <= quantity){
-                console.log('Success!')
+                // console.log('Success!')
+                quantity -= arr2;
+                var total = price * arr2;
+                // console.log(total);
+                // console.log(quantity);
+                updateProductAvail(quantity, arr1, total);
             } else {
                 console.log('Insufficient quantity!')
             }
         }
 
-    }); 
-        
+    });        
+}
+
+function updateProductAvail(arr1, arr2, arr3){
+    connection.query('UPDATE products SET stock_quantity = ' + arr1 + ' WHERE item_id= ' + arr2, function(err, res){
+        if(err) throw err;
+        // console.log(res);
+        console.log('\n-----------------------------------');
+        console.log('Your order has been processed. Total price: $' + arr3);
+    });
+    connection.end();
 }
