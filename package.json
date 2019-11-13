@@ -1,0 +1,22 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Node application to search for items similar to Amazon",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miserablepop/nodejs-mysql.git"
+  },
+  "author": "JC Lenz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miserablepop/nodejs-mysql/issues"
+  },
+  "homepage": "https://github.com/miserablepop/nodejs-mysql#readme",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
+}
