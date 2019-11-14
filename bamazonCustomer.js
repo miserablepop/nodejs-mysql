@@ -1,6 +1,8 @@
 // Dependencies
 var mysql = require('mysql');
 var inquirer = require('inquirer');
+var dotenv = require('dotenv');
+dotenv.config();
 
 // Create the connection to sql database
 var connection = mysql.createConnection({
@@ -10,10 +12,10 @@ var connection = mysql.createConnection({
     port: 3306,
 
     // Set user name
-    user: 'root',
+    user: process.env.MYSQL_username,
 
     // Set password
-    password: 'Otto22.rents',
+    password: process.env.MYSQL_password,
 
     // Set database
     database: 'bamazon_db'
