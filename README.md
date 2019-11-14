@@ -30,7 +30,11 @@ The customer interface:
 3) Asks how many items the customer would like to purchase
 4) Confirms order & updates product inventory in database
 ```
+<<<<<<< HEAD
 ![customer demo](screenshots/bamazonCustomer.png)
+=======
+![customer demo](bamazonCustomer.png)
+>>>>>>> 991e0340bf5501b7813ab2e719f6f30b9aa4d0b5
 
 Below is a screen recording of the app working:
 
